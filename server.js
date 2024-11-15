@@ -26,7 +26,7 @@ async function sendEmail(ponto) {
             service: 'gmail',
             auth: {
                 user: process.env.EMAIL_USER || 'MonitorBueiros@gmail.com',
-                pass: process.env.EMAIL_PASS || 'whty tzgg ljfq hdzg' // Use senha de aplicativo
+                pass: process.env.EMAIL_PASS || 'cowl ihpn ioki xpcu' // Use senha de aplicativo
             }
         });
 
