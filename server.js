@@ -23,15 +23,15 @@ let collection;
 async function sendEmail(ponto) {
     try {
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            service: 'hotmail',
             auth: {
-                user: process.env.EMAIL_USER || 'MonitoramentoBueiros@gmail.com',
-                pass: process.env.EMAIL_PASS || 'Bueiros@davinci' // Use senha de aplicativo
+                user: process.env.EMAIL_USER || 'MonitorBueiros@hotmail.com',
+                pass: process.env.EMAIL_PASS || 'itifbhtnuimmlmvf' // Use senha de aplicativo
             }
         });
 
         const mailOptions = {
-            from: process.env.EMAIL_USER || 'MonitoramentoBueiros@gmail.com',
+            from: process.env.EMAIL_USER || 'MonitorBueiros@hotmail.com',
             to: 'r.immaginario@gmail.com', // Substitua pelo destinatário
             subject: `Alerta: Ponto Marcado`,
             text: `O ponto "${ponto.nome}" foi marcado como ativo. Endereço: ${ponto.endereco}`
