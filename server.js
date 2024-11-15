@@ -23,7 +23,7 @@ let collection;
 async function sendEmail(ponto) {
     try {
         const transporter = nodemailer.createTransport({
-            service: 'hotmail',
+            service: 'gmail',
             auth: {
                 user: process.env.EMAIL_USER || 'MonitorBueiros@gmail.com',
                 pass: process.env.EMAIL_PASS || 'whty tzgg ljfq hdzg' // Use senha de aplicativo
