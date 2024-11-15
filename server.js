@@ -38,7 +38,8 @@ app.get('/enderecos', async (req, res) => {
 });
 
 // Inicializar servidor
-app.listen(port, async () => {
+app.listen(PORT, async () => {
     await connectDB();
-    console.log(`Servidor rodando em http://localhost:${port}`);
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
