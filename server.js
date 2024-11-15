@@ -32,7 +32,7 @@ async function sendEmail(ponto) {
 
         const mailOptions = {
             from: process.env.EMAIL_USER || 'MonitorBueiros@gmail.com',
-            to: 'r.immaginario@gmail.com', // Substitua pelo destinatário
+            to: 'MonitorBueiros@gmail.com', // Substitua pelo destinatário
             subject: `Alerta: Ponto Marcado`,
             text: `O ponto "${ponto.nome}" foi marcado como ativo. Endereço: ${ponto.endereco}`
         };
