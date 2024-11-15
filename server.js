@@ -4,7 +4,7 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Conectar ao MongoDB
 const uri = "mongodb+srv://rimmaginario:iER0P9ZVMdBeA7r7@bueiros.4x2w8.mongodb.net/?retryWrites=true&w=majority";
