@@ -1,10 +1,14 @@
 console.log("URI do MongoDB:", process.env.MONGO_URI);
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors'); // Importar o middleware de CORS
 const { MongoClient } = require('mongodb');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Permitir requisições de diferentes origens
+app.use(cors());
 
 // Conectar ao MongoDB
 const uri = "mongodb+srv://rimmaginario:iER0P9ZVMdBeA7r7@bueiros.4x2w8.mongodb.net/?retryWrites=true&w=majority";
