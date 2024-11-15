@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors'); // Importar o middleware de CORS
 const { MongoClient } = require('mongodb');
+const nodemailer = require('nodemailer'); // Importar o módulo nodemailer
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,6 +17,33 @@ const client = new MongoClient(uri);
 
 
 let collection;
+
+
+// Função para enviar e-mails
+async function sendEmail(ponto) {
+    try {
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER || 'MonitoramentoBueiros@gmail.com',
+                pass: process.env.EMAIL_PASS || 'Bueiros@davinci' // Use senha de aplicativo
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER || 'MonitoramentoBueiros@gmail.com',
+            to: 'r.immaginario@gmail.com', // Substitua pelo destinatário
+            subject: `Alerta: Ponto Marcado`,
+            text: `O ponto "${ponto.nome}" foi marcado como ativo. Endereço: ${ponto.endereco}`
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log('E-mail enviado com sucesso para o ponto:', ponto.nome);
+    } catch (error) {
+        console.error('Erro ao enviar e-mail para o ponto:', ponto.nome, error);
+    }
+}
+
 
 // Conexão com o banco
 async function connectDB() {
@@ -34,6 +62,14 @@ async function connectDB() {
 app.get('/enderecos', async (req, res) => {
     try {
         const enderecos = await collection.find({}).toArray();
+
+        // Enviar e-mails para pontos marcados como "mostrar: true"
+        for (const ponto of enderecos) {
+            if (ponto.mostrar) {
+                await sendEmail(ponto);
+            }
+        }
+        
         res.json(enderecos);
     } catch (error) {
         console.error("Erro ao buscar dados:", error);
@@ -46,4 +82,3 @@ app.listen(PORT, async () => {
     await connectDB();
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
-
